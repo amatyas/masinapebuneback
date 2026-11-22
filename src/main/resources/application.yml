@@ -12,10 +12,10 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 server:
-  port: 8080 
+  port: 7777 
 spring:
     application:
-        name: VisioLogicBatchTOOTO
+        name: MasinaPeBuneAPI
     batch:
         job:
             enabled: true 

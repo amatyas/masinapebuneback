@@ -40,9 +40,4 @@ spring:
             enabled: false
 logging:
   config:     
-    classpath:logback-dev.xml  
-
-clientlive: 
-  exportdir: D:/Dev/VisioLogicBatch/distrib/download	
-  dayToKeepFiles: 90
-  emailDomainsToExport: ca-cib.com
+    classpath:logback-dev.xml 
