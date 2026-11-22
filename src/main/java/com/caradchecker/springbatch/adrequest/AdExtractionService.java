@@ -69,20 +69,20 @@ public class AdExtractionService {
 			}
 			log.info("{} parallel llm2_mechanical_check llm3_market_price_check llm4_ad_check", requestId);
 			CompletableFuture<ExtractionOutcome> llm2 = CompletableFuture.supplyAsync(
-					() -> runStage(requestId, provider, AnalysisStage.LLM2_MECHANICAL_CHECK, () -> complete(requestId, provider, null, AnalysisStage.LLM2_MECHANICAL_CHECK, "analysis", request.getLanguage(), request.getCountry(), AnalysisInputs.llm2(objectMapper, llm1.data(), request.getCountry()), true, request.getUrl())),
+					() -> runStage(requestId, provider, AnalysisStage.LLM2_MECHANICAL_CHECK, () -> complete(requestId, provider, properties.modelFor(AnalysisStage.LLM2_MECHANICAL_CHECK.name()), AnalysisStage.LLM2_MECHANICAL_CHECK, "analysis", request.getLanguage(), request.getCountry(), AnalysisInputs.llm2(objectMapper, llm1.data(), request.getCountry()), true, request.getUrl())),
 					stageExecutor);
 			CompletableFuture<ExtractionOutcome> llm3 = CompletableFuture.supplyAsync(
-					() -> runStage(requestId, provider, AnalysisStage.LLM3_MARKET_PRICE_CHECK, () -> complete(requestId, provider, null, AnalysisStage.LLM3_MARKET_PRICE_CHECK, "analysis", request.getLanguage(), request.getCountry(), AnalysisInputs.llm3(objectMapper, llm1.data(), request.getCountry()), true, request.getUrl())),
+					() -> runStage(requestId, provider, AnalysisStage.LLM3_MARKET_PRICE_CHECK, () -> complete(requestId, provider, properties.modelFor(AnalysisStage.LLM3_MARKET_PRICE_CHECK.name()), AnalysisStage.LLM3_MARKET_PRICE_CHECK, "analysis", request.getLanguage(), request.getCountry(), AnalysisInputs.llm3(objectMapper, llm1.data(), request.getCountry()), true, request.getUrl())),
 					stageExecutor);
 			CompletableFuture<ExtractionOutcome> llm4 = CompletableFuture.supplyAsync(
-					() -> runStage(requestId, provider, AnalysisStage.LLM4_AD_CHECK, () -> complete(requestId, provider, null, AnalysisStage.LLM4_AD_CHECK, "analysis", request.getLanguage(), null, AnalysisInputs.llm4(objectMapper, llm1.data(), request.getUrl()), false, request.getUrl())),
+					() -> runStage(requestId, provider, AnalysisStage.LLM4_AD_CHECK, () -> complete(requestId, provider, properties.modelFor(AnalysisStage.LLM4_AD_CHECK.name()), AnalysisStage.LLM4_AD_CHECK, "analysis", request.getLanguage(), null, AnalysisInputs.llm4(objectMapper, llm1.data(), request.getUrl()), false, request.getUrl())),
 					stageExecutor);
 			CompletableFuture.allOf(llm2, llm3, llm4).join();
 			ExtractionOutcome technical = llm2.join();
 			ExtractionOutcome market = llm3.join();
 			ExtractionOutcome audit = llm4.join();
 			ExtractionOutcome synthesis = runStage(requestId, provider, AnalysisStage.LLM5_AD_VERDICT,
-					() -> complete(requestId, provider, null, AnalysisStage.LLM5_AD_VERDICT, "analysis", request.getLanguage(), null, AnalysisInputs.llm5(objectMapper, llm1.data(), technical, market, audit), false, request.getUrl()));
+					() -> complete(requestId, provider, properties.modelFor(AnalysisStage.LLM5_AD_VERDICT.name()), AnalysisStage.LLM5_AD_VERDICT, "analysis", request.getLanguage(), null, AnalysisInputs.llm5(objectMapper, llm1.data(), technical, market, audit), false, request.getUrl()));
 			updateStatus(requestId, synthesis.status() == ExtractionStatus.OK ? AdCheckStatus.COMPLETED : AdCheckStatus.FAILED);
 		} catch (RuntimeException ex) {
 			log.error("{} extraction failed", requestId, ex);

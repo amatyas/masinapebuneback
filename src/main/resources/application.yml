@@ -49,9 +49,13 @@ llm:
   provider: ${LLM_PROVIDER:openai}
   ad-extractor-provider: ${AD_EXTRACTOR_PROVIDER:openai}
   ad-extractor-model: ${AD_EXTRACTOR_MODEL:gpt-6.2-astra}
+  mechanical-model: ${LLM2_MODEL:gpt-6.2-sol}
+  market-model: ${LLM3_MODEL:gpt-6.1-terra}
+  audit-model: ${LLM4_MODEL:gpt-6.1-terra}
+  verdict-model: ${LLM5_MODEL:gpt-6.2-sol}
   openai:
     api-key: ${OPENAI_API_KEY:}
-    model: ${OPENAI_MODEL:gpt-6.2-astra}
+    model: ${OPENAI_MODEL:gpt-6.2-sol}
     url: ${OPENAI_URL:https://api.openai.com/v1/responses}
   gemini:
     api-key: ${GEMINI_API_KEY:}
