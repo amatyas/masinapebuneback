@@ -44,3 +44,14 @@ whatsapp:
 
 webservice:
   multipart-url: ${WEBSERVICE_MULTIPART_URL:}
+
+llm:
+  provider: ${LLM_PROVIDER:openai}
+  openai:
+    api-key: ${OPENAI_API_KEY:}
+    model: ${OPENAI_MODEL:gpt-6.2-astra}
+    url: ${OPENAI_URL:https://api.openai.com/v1/responses}
+  gemini:
+    api-key: ${GEMINI_API_KEY:}
+    model: ${GEMINI_MODEL:gemini-3.5-flash}
+    url: ${GEMINI_URL:https://generativelanguage.googleapis.com/v1beta}

@@ -1,5 +1,5 @@
 <configuration>
-    <property name="LOG_FOLDER" value="D:/Dev/VisiologicBatchOpenJdk/distrib/logs" />
+    <property name="LOG_FOLDER" value="/var/www/vhosts/masinapebune.ro/masinapebuneback/logs" />
     
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">

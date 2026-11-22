@@ -23,7 +23,29 @@ public class DatabaseConfig {
     @PostConstruct
     @Transactional
     public void initialize() {
-
+        jdbcTemplate.execute("""
+                CREATE TABLE IF NOT EXISTS ad_check_requests (
+                    id VARCHAR(36) NOT NULL,
+                    url VARCHAR(2048) NOT NULL,
+                    status VARCHAR(32) NOT NULL,
+                    created_at DATETIME(6) NOT NULL,
+                    PRIMARY KEY (id)
+                )
+                """);
+        jdbcTemplate.execute("""
+                CREATE TABLE IF NOT EXISTS ad_check_extractions (
+                    id VARCHAR(36) NOT NULL,
+                    request_id VARCHAR(36) NOT NULL,
+                    provider VARCHAR(16) NOT NULL,
+                    status VARCHAR(16) NOT NULL,
+                    result_json LONGTEXT NULL,
+                    error_message VARCHAR(2000) NULL,
+                    duration_ms BIGINT NULL,
+                    created_at DATETIME(6) NOT NULL,
+                    PRIMARY KEY (id),
+                    UNIQUE KEY uk_ad_check_extraction (request_id, provider)
+                )
+                """);
     }
 
    

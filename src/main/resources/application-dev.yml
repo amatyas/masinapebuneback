@@ -26,7 +26,7 @@ spring:
            connection-timeout: 600000
            maximum-pool-size: 100
            minimum-idle: 20
-       url: jdbc:mysql://localhost:3306/visiologic?serverTimezone=Europe/Paris
+       url: jdbc:mysql://localhost:3306/masinapebune?serverTimezone=Europe/Paris
        username: root
        #password: 
     task: 
