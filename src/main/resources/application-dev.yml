@@ -1,0 +1,48 @@
+# ===================================================================
+# Spring Boot configuration for the "dev" profile.
+#
+# This configuration overrides the application.yml file.
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+server:
+  port: 7777 
+spring:
+    config:
+        activate:
+            on-profile: dev
+    devtools:
+        restart:  
+            enabled: true
+    jackson:
+        serialization.indent_output: true
+    datasource:
+       driverClassName: com.mysql.cj.jdbc.Driver
+       hikari:
+           connection-timeout: 600000
+           maximum-pool-size: 100
+           minimum-idle: 20
+       url: jdbc:mysql://localhost:3306/visiologic?serverTimezone=Europe/Paris
+       username: root
+       #password: 
+    task: 
+        scheduling : 
+            pool : 
+                size : 5         
+    batch:
+        jdbc:
+            isolation-level-for-create: TRANSACTION_READ_COMMITTED
+        job:
+            enabled: false
+logging:
+  config:     
+    classpath:logback-dev.xml  
+
+clientlive: 
+  exportdir: D:/Dev/VisioLogicBatch/distrib/download	
+  dayToKeepFiles: 90
+  emailDomainsToExport: ca-cib.com

@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.1.2</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.caradchecker.springbatch</groupId>
+	<artifactId>car-ad-checker-api</artifactId>
+	<version>1.0</version>
+	<name>CarAdChecker</name>
+	<description>CarAdChecker</description>
+
+	<properties>
+		<java.version>20</java.version>
+		<start-class>com.caradchecker.springbatch.CarAdCheckerBatchApplication</start-class>
+	</properties>
+
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-to-slf4j -->
+         <dependency>
+             <groupId>org.apache.logging.log4j</groupId>
+             <artifactId>log4j-to-slf4j</artifactId>
+         </dependency>
+
+         <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
+         <dependency>
+             <groupId>org.apache.logging.log4j</groupId>
+             <artifactId>log4j-api</artifactId>
+         </dependency>
+         
+         <dependency>
+		    <groupId>ch.qos.logback</groupId>
+		    <artifactId>logback-classic</artifactId>
+		</dependency>
+         
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-batch</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.batch</groupId>
+			<artifactId>spring-batch-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>2.0.1.Final</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.ldap/spring-ldap-core -->
+		<dependency>
+			<groupId>org.springframework.ldap</groupId>
+			<artifactId>spring-ldap-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.14</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.mwiede</groupId>
+			<artifactId>jsch</artifactId>
+			<version>0.2.21</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20240303</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/ru.yandex.qatools.ashot/ashot -->
+		<dependency>
+			<groupId>ru.yandex.qatools.ashot</groupId>
+			<artifactId>ashot</artifactId>
+			<version>1.5.4</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-chrome-driver -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-chrome-driver</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.simplejavamail</groupId>
+			<artifactId>simple-java-mail</artifactId>
+			<version>8.11.2</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
+		<dependency>
+			<groupId>org.apache.pdfbox</groupId>
+			<artifactId>pdfbox</artifactId>
+			<version>3.0.3</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.8.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+
+		<dependency>
+		    <groupId>org.simplejavamail</groupId>
+		    <artifactId>simple-java-mail</artifactId>
+		    <version>6.4.4</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.pdfbox</groupId>
+		    <artifactId>pdfbox</artifactId>
+		    <version>2.0.22</version>
+		</dependency>
+		
+		
+		
+		<!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
+		<dependency>
+		    <groupId>org.assertj</groupId>
+		    <artifactId>assertj-core</artifactId>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.itextpdf</groupId>
+		    <artifactId>itextpdf</artifactId>
+		    <version>5.5.13.2</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.opencsv</groupId>
+		    <artifactId>opencsv</artifactId>
+		    <version>4.1</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/commons-cli/commons-cli -->
+		<dependency>
+		    <groupId>commons-cli</groupId>
+		    <artifactId>commons-cli</artifactId>
+		    <version>1.4</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-csv -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-csv</artifactId>
+		    <version>1.9.0</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi</artifactId>
+		    <version>5.2.2</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi-ooxml</artifactId>
+		    <version>5.2.2</version>
+		</dependency>
+		
+		
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20240303</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/ru.yandex.qatools.ashot/ashot -->
+		<dependency>
+		    <groupId>ru.yandex.qatools.ashot</groupId>
+		    <artifactId>ashot</artifactId>
+		    <version>1.5.4</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.27</version>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.seleniumhq.selenium</groupId>
+		    <artifactId>selenium-java</artifactId>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-webflux</artifactId>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.snmp4j/snmp4j -->
+		<dependency>
+			<groupId>org.snmp4j</groupId>
+			<artifactId>snmp4j</artifactId>
+			<version>2.8.18</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

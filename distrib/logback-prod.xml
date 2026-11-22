@@ -1,0 +1,563 @@
+<configuration>
+    <property name="LOG_FOLDER" value="D:/Dev/VisiologicBatchOpenJdk/distrib/logs" />
+    
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+               %d{yyyy-MM-dd HH:mm:ss} [%thread] %level %logger.%M:%line - %msg%n
+            </Pattern>
+        </layout>
+    </appender>
+    
+    <appender name="all-appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FOLDER}/batch.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} [%thread] %level %logger.%M:%line - %msg%n
+			</Pattern>
+		</encoder>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>${LOG_FOLDER}/batch.%i.log.zip</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+
+	</appender>
+    
+    <appender name="activedir-appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FOLDER}/batch-sync-ldap.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} [%thread] %level %logger.%M:%line - %msg%n
+			</Pattern>
+		</encoder>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>${LOG_FOLDER}/batch-sync-ldap.%i.log.zip</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+	
+	
+	<appender name="purgedata-appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FOLDER}/batch-purge.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} [%thread] %level %logger.%M:%line - %msg%n
+			</Pattern>
+		</encoder>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>${LOG_FOLDER}/batch-purge.%i.log.zip</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+	
+	<appender name="checkstatus-appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FOLDER}/batch-checkstatus.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} [%thread] %level %logger.%M:%line - %msg%n
+			</Pattern>
+		</encoder>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>${LOG_FOLDER}/batch-checkstatus.%i.log.zip</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+	
+	<appender name="runcronjobs-appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FOLDER}/batch-runcronjobs.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} [%thread] %level %logger.%M:%line - %msg%n
+			</Pattern>
+		</encoder>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>${LOG_FOLDER}/batch-runcronjobs.%i.log.zip</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+	
+	<appender name="webex-appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FOLDER}/batch-webexmeetingsapi.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} [%thread] %level %logger.%M:%line - %msg%n
+			</Pattern>
+		</encoder>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>${LOG_FOLDER}/batch-webexmeetingsapi.%i.log.zip</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+	
+	<appender name="reporting-appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FOLDER}/batch-reporting.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} [%thread] %level %logger.%M:%line - %msg%n
+			</Pattern>
+		</encoder>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>${LOG_FOLDER}/batch-reporting.%i.log.zip</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+	
+	<appender name="alerts" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FOLDER}/batch-alerts.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} [%thread] %level %logger.%M:%line - %msg%n
+			</Pattern>
+		</encoder>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>${LOG_FOLDER}/batch-alerts.%i.log.zip</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+	
+	
+	<appender name="msteams" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FOLDER}/batch-msteams.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} [%thread] %level %logger.%M:%line - %msg%n
+			</Pattern>
+		</encoder>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>${LOG_FOLDER}/batch-msteams.%i.log.zip</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+	
+	<appender name="jabber" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FOLDER}/batch-jabber.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} [%thread] %level %logger.%M:%line - %msg%n
+			</Pattern>
+		</encoder>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>${LOG_FOLDER}/batch-jabber.%i.log.zip</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+
+
+	<appender name="metis" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FOLDER}/batch-metis.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} [%thread] %level %logger.%M:%line - %msg%n
+			</Pattern>
+		</encoder>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>${LOG_FOLDER}/batch-metis.%i.log.zip</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+
+	
+	
+	<appender name="clientlive" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FOLDER}/batch-clientlive-export.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} [%thread] %level %logger.%M:%line - %msg%n
+			</Pattern>
+		</encoder>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>${LOG_FOLDER}/batch-clientlive-export.%i.log.zip</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+	
+	
+
+	
+	<appender name="billing_ca" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FOLDER}/batch-billing-ca.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} [%thread] %level %logger.%M:%line - %msg%n
+			</Pattern>
+		</encoder>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>${LOG_FOLDER}/batch-webex-codecs-sync.%i.log.zip</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+	
+	<appender name="barco-checkstatus-appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FOLDER}/batch-checkstatus-barco.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} [%thread] %level %logger.%M:%line - %msg%n
+			</Pattern>
+		</encoder> 
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>${LOG_FOLDER}/batch-checkstatus-barco.%i.log.zip</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+
+	<appender name="otherdevices-checkstatus-appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FOLDER}/batch-checkstatus-other-devices.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} [%thread] %level %logger.%M:%line - %msg%n
+			</Pattern>
+		</encoder> 
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>${LOG_FOLDER}/batch-checkstatus-other-devices.%i.log.zip</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+
+	<appender name="printers-checkstatus-appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FOLDER}/batch-checkstatus-printers.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} [%thread] %level %logger.%M:%line - %msg%n
+			</Pattern>
+		</encoder> 
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>${LOG_FOLDER}/batch-checkstatus-printers.%i.log.zip</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+
+
+
+	<appender name="screens-checkstatus-appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FOLDER}/batch-checkstatus-screens.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} [%thread] %level %logger.%M:%line - %msg%n
+			</Pattern>
+		</encoder> 
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>${LOG_FOLDER}/batch-checkstatus-screens.%i.log.zip</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+
+
+	<appender name="crestron-checkstatus-appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FOLDER}/batch-checkstatus-crestron.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} [%thread] %level %logger.%M:%line - %msg%n
+			</Pattern>
+		</encoder> 
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>${LOG_FOLDER}/batch-checkstatus-crestron.%i.log.zip</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+
+
+	<appender name="polycom-appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FOLDER}/batch-polylens.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} [%thread] %level %logger.%M:%line - %msg%n
+			</Pattern>
+		</encoder> 
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>${LOG_FOLDER}/batch-polylens.%i.log.zip</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+
+	<appender name="workspace-room-status-appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FOLDER}/batch-workspace-room-status.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} [%thread] %level %logger.%M:%line - %msg%n
+			</Pattern>
+		</encoder>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>${LOG_FOLDER}/batch-workspace-room-status.%i.log.zip</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+
+	<appender name="ai-chat-appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FOLDER}/ai-chat.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} [%thread] %level %logger.%M:%line - %msg%n
+			</Pattern>
+		</encoder>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>${LOG_FOLDER}/ai-chat.%i.log.zip</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+
+	<appender name="roompanel-checkstatus-appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FOLDER}/batch-checkstatus-roompanel.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} [%thread] %level %logger.%M:%line - %msg%n
+			</Pattern>
+		</encoder> 
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>${LOG_FOLDER}/batch-checkstatus-roompanel.%i.log.zip</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+
+	
+    	<logger name="com.caradchecker.springbatch.activedirectory" level="INFO" additivity="false">
+		<appender-ref ref="activedir-appender" />
+	</logger> 
+	
+	<logger name="com.caradchecker.springbatch.purgedata" level="INFO" additivity="false">
+		<appender-ref ref="purgedata-appender" />
+	</logger> 
+	
+	<logger name="com.caradchecker.springbatch.checkcodecstatus" level="INFO" additivity="false">
+		<appender-ref ref="checkstatus-appender" />
+	</logger>
+
+	<logger name="com.caradchecker.springbatch.cisco" level="INFO" additivity="false">
+		<appender-ref ref="checkstatus-appender" />
+	</logger>
+
+	<logger name="com.caradchecker.springbatch.rest.api.cisco" level="INFO" additivity="false">
+		<appender-ref ref="checkstatus-appender" />
+	</logger>  
+	
+	<logger name="com.caradchecker.springbatch.runcronjobs" level="INFO" additivity="false">
+		<appender-ref ref="runcronjobs-appender" />
+	</logger> 
+		
+	<logger name="com.caradchecker.springbatch.reporting" level="INFO" additivity="false">
+		<appender-ref ref="reporting-appender" />
+	</logger> 
+		
+	<logger name="com.caradchecker.springbatch.alerts" level="INFO" additivity="false">
+		<appender-ref ref="alerts" />
+	</logger> 
+	
+	<logger name="com.caradchecker.springbatch.msteams" level="INFO" additivity="false">
+		<appender-ref ref="msteams" />
+	</logger> 
+	
+	<logger name="com.caradchecker.springbatch.jabber" level="INFO" additivity="false">
+		<appender-ref ref="jabber" />
+	</logger> 
+	
+	<logger name="com.visiologic.creditagricole.clientlive" level="INFO" additivity="false">
+		<appender-ref ref="clientlive" />
+	</logger>
+	
+	<logger name="com.caradchecker.springbatch.webex" level="INFO" additivity="false">
+		<appender-ref ref="webex-appender" />
+	</logger>
+	
+	<logger name="com.caradchecker.springbatch.creditagricole.billing.CreditAgricoleComputeBillingJob" level="INFO" additivity="false">
+		<appender-ref ref="billing_ca" />
+	</logger>
+	  
+	<logger name="com.caradchecker.springbatch.checkbarcostatus" level="INFO" additivity="false">
+		<appender-ref ref="barco-checkstatus-appender" />
+	</logger>
+
+	<logger name="com.caradchecker.springbatch.creditagricole.metis.MetisJob" level="INFO" additivity="false">
+		<appender-ref ref="metis" />
+	</logger>
+
+	<logger name="com.caradchecker.springbatch.checkotherdevicesstatus" level="INFO" additivity="false">
+		<appender-ref ref="otherdevices-checkstatus-appender" />
+	</logger>
+
+	<logger name="com.caradchecker.springbatch.screens" level="INFO" additivity="false">
+		<appender-ref ref="screens-checkstatus-appender" />
+	</logger>
+
+	<logger name="com.caradchecker.springbatch.checkairmediastatus" level="INFO" additivity="false">
+		<appender-ref ref="crestron-checkstatus-appender" />
+	</logger>
+
+	<logger name="com.caradchecker.springbatch.checkprinterstatus" level="INFO" additivity="false">
+		<appender-ref ref="printers-checkstatus-appender" />
+	</logger>
+
+	<logger name="com.caradchecker.springbatch.polycom" level="INFO" additivity="false">
+		<appender-ref ref="polycom-appender" />
+	</logger>
+
+	<logger name="com.caradchecker.springbatch.workspacestatus" level="INFO" additivity="false">
+		<appender-ref ref="workspace-room-status-appender" />
+	</logger>
+
+	<logger name="com.caradchecker.springbatch.rest.api.ai" level="INFO" additivity="false">
+		<appender-ref ref="ai-chat-appender" />
+	</logger>
+
+	<logger name="com.caradchecker.springbatch.checkroompanelstatus" level="INFO" additivity="false">
+		<appender-ref ref="roompanel-checkstatus-appender" />
+	</logger>
+	
+	<root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="all-appender"/>
+    </root>
+
+</configuration>

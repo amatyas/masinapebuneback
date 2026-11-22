@@ -1,0 +1,46 @@
+# ===================================================================
+# Spring Boot configuration.
+#
+# This configuration will be overridden by the Spring profile you use,
+# for example application-dev.yml if you use the "dev" profile.
+#
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+server:
+  port: 8080 
+spring:
+    application:
+        name: VisioLogicBatchTOOTO
+    batch:
+        job:
+            enabled: true 
+    profiles:
+        # The commented value for `active` can be replaced with valid Spring profiles to load.
+        # Otherwise, it will be filled in by gradle when building the WAR file
+        # Either way, it can be overridden by `--spring.profiles.active` value passed in the commandline or `-Dspring.profiles.active` set in `JAVA_OPTS`
+        active: dev
+info:
+    project:
+        version: 1.0 #project.version#
+
+management:
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        include: '*'
+
+whatsapp:
+  verify-token: ${WHATSAPP_VERIFY_TOKEN:mon_token_secret}
+  access-token: ${WHATSAPP_ACCESS_TOKEN:}
+  phone-number-id: ${WHATSAPP_PHONE_NUMBER_ID:}
+  api-url: https://graph.facebook.com/v26.0
+  ack-message: "merci bcp bien recu"
+
+webservice:
+  multipart-url: ${WEBSERVICE_MULTIPART_URL:}
