@@ -39,8 +39,13 @@ public class CarAdSchema {
 
 			# LANGUAGE AND OUTPUT
 
-			- All user-facing content MUST be in natural Romanian.
-			- Use Romanian automotive terminology.
+			- Detect the language of the advertisement page.
+			- Write every user-facing string in that same language.
+			- A Romanian listing produces a Romanian report.
+			- A French listing produces a French report.
+			- Use the automotive terminology of that language.
+			- Set metadata.language to the matching language code,
+			  such as ro, fr, de or en.
 			- Be direct, precise, practical and understandable.
 			- Avoid generic advice unless it is genuinely relevant.
 			- Do not use sensationalist language.
@@ -468,7 +473,7 @@ public class CarAdSchema {
 			Evaluate seller claims, missing documentation,
 			contradictions and relevant technical risks.
 
-			Generate 5 to 12 prioritized questions in Romanian.
+			Generate 5 to 12 prioritized questions in the listing language.
 
 			Questions must:
 			- Be specific to the advertised vehicle.
@@ -483,13 +488,13 @@ public class CarAdSchema {
 			For each question provide:
 			- Priority: CRITICAL / HIGH / MEDIUM / LOW.
 			- Category.
-			- Question text in Romanian.
+			- Question text in the listing language.
 			- Why the question matters.
 			- What a satisfactory answer would include.
 			- Warning signs in the response.
 			- Related risk IDs when relevant.
 
-			Also generate one ready-to-send Romanian message
+			Also generate one ready-to-send message in the listing language
 			that groups the most important questions.
 
 			The message should be polite, natural, concise
@@ -609,7 +614,7 @@ public class CarAdSchema {
 			8. Confirm that severity and confidence are separate.
 			9. Confirm that the verdict follows the evidence.
 			10. Confirm that the entire output matches the schema.
-			11. Confirm that user-facing strings are in Romanian.
+			11. Confirm that user-facing strings use the listing language.
 			12. Confirm that unavailable information is null,
 			    not guessed.
 
@@ -672,7 +677,7 @@ public class CarAdSchema {
 	}
 
 	private static ObjectNode build(ObjectMapper mapper) {
-		ObjectNode root = object(mapper, "MasinaPeBune purchase report. User-facing strings are Romanian.");
+		ObjectNode root = object(mapper, "MasinaPeBune purchase report. User-facing strings use the listing language.");
 		add(root, "metadata", metadata(mapper));
 		add(root, "vehicle", vehicle(mapper));
 		add(root, "extraction_quality", extractionQuality(mapper));
@@ -691,7 +696,7 @@ public class CarAdSchema {
 	private static ObjectNode metadata(ObjectMapper mapper) {
 		ObjectNode node = object(mapper, "Schema version, date, language and sources used.");
 		add(node, "schema_version", text(mapper, "Always 1.0."));
-		add(node, "language", text(mapper, "Always ro."));
+		add(node, "language", text(mapper, "Language code of the advertisement, such as ro, fr, de or en."));
 		add(node, "listing_url", nullable(mapper, "string", "Advertisement URL."));
 		add(node, "source_platform", nullable(mapper, "string", "Marketplace name."));
 		add(node, "sources", objectArray(mapper, "Sources actually used. Empty when none were retrieved.", source(mapper)));
@@ -837,7 +842,7 @@ public class CarAdSchema {
 
 	private static ObjectNode inconsistency(ObjectMapper mapper) {
 		ObjectNode node = object(mapper, "One contradiction in the advertisement.");
-		add(node, "title", text(mapper, "Short title in Romanian."));
+		add(node, "title", text(mapper, "Short title in the listing language."));
 		add(node, "conflicting_claims", text(mapper, "The conflicting claims."));
 		add(node, "sources", stringArray(mapper, "Where the conflicting claims appear."));
 		add(node, "why_it_matters", text(mapper, "Why the contradiction matters."));
@@ -849,8 +854,8 @@ public class CarAdSchema {
 	private static ObjectNode risk(ObjectMapper mapper) {
 		ObjectNode node = object(mapper, "One vehicle-specific risk.");
 		add(node, "id", text(mapper, "Stable id, such as R1."));
-		add(node, "title", text(mapper, "Concise title in Romanian."));
-		add(node, "explanation", text(mapper, "Explanation in Romanian."));
+		add(node, "title", text(mapper, "Concise title in the listing language."));
+		add(node, "explanation", text(mapper, "Explanation in the listing language."));
 		add(node, "evidence", text(mapper, "Evidence supporting the concern."));
 		add(node, "evidence_class", enumField(mapper, "How the finding is classified.", "OBSERVED", "DECLARED", "VERIFIED", "INFERRED", "UNKNOWN"));
 		add(node, "severity", enumField(mapper, "Potential consequence.", "LOW", "MEDIUM", "HIGH", "CRITICAL"));
@@ -961,7 +966,7 @@ public class CarAdSchema {
 	private static ObjectNode sellerQuestions(ObjectMapper mapper) {
 		ObjectNode node = object(mapper, "Priority questions and a WhatsApp message.");
 		add(node, "questions", objectArray(mapper, "Five to twelve questions when the listing was readable.", question(mapper)));
-		add(node, "whatsapp_message", nullable(mapper, "string", "Polite Romanian message grouping the important questions."));
+		add(node, "whatsapp_message", nullable(mapper, "string", "Polite message in the listing language grouping the important questions."));
 		return node;
 	}
 
@@ -969,7 +974,7 @@ public class CarAdSchema {
 		ObjectNode node = object(mapper, "One question for the seller.");
 		add(node, "priority", enumField(mapper, "Priority.", "CRITICAL", "HIGH", "MEDIUM", "LOW"));
 		add(node, "category", text(mapper, "Question category."));
-		add(node, "question", text(mapper, "Question in Romanian."));
+		add(node, "question", text(mapper, "Question in the listing language."));
 		add(node, "why_it_matters", text(mapper, "Why the question matters."));
 		add(node, "satisfactory_answer", text(mapper, "What a satisfactory answer includes."));
 		add(node, "warning_signs", text(mapper, "Warning signs in the answer."));
@@ -991,11 +996,11 @@ public class CarAdSchema {
 		add(node, "transparency_score", score(mapper, "Advertisement transparency from 0 to 100. Not a mechanical score."));
 		add(node, "evidence_completeness_score", score(mapper, "Evidence completeness from 0 to 100. Not a mechanical score."));
 		add(node, "recommendation", enumField(mapper, "Exactly one recommendation.", "SHORTLIST", "NEGOTIATE", "VERIFY_FIRST", "AVOID", "INSUFFICIENT_DATA"));
-		add(node, "conclusion", text(mapper, "One-sentence conclusion in Romanian."));
+		add(node, "conclusion", text(mapper, "One-sentence conclusion in the listing language."));
 		add(node, "positive_points", stringArray(mapper, "Main positive points."));
 		add(node, "concerns", stringArray(mapper, "Main concerns."));
 		add(node, "critical_missing_information", stringArray(mapper, "Critical missing information."));
-		add(node, "recommended_next_action", text(mapper, "Recommended next action in Romanian."));
+		add(node, "recommended_next_action", text(mapper, "Recommended next action in the listing language."));
 		add(node, "conditions_that_change_verdict", stringArray(mapper, "Facts that would change the verdict."));
 		add(node, "analysis_confidence", enumField(mapper, "Confidence in the analysis.", "LOW", "MEDIUM", "HIGH"));
 		return node;

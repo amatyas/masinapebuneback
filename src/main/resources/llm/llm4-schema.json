@@ -1,0 +1,505 @@
+{
+  "type": "json_schema",
+  "name": "masinapebune_llm4_listing_audit",
+  "strict": true,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "inconsistencies": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "title_ro": {
+              "type": "string"
+            },
+            "category": {
+              "type": "string",
+              "enum": [
+                "IDENTITY",
+                "TECHNICAL_SPECS",
+                "MILEAGE",
+                "HISTORY",
+                "OWNERSHIP",
+                "PRICE_TERMS",
+                "WARRANTY",
+                "EQUIPMENT",
+                "OTHER"
+              ]
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "CONFIRMED_CONTRADICTION",
+                "POSSIBLE_CONTRADICTION"
+              ]
+            },
+            "claim_a_ro": {
+              "type": "string"
+            },
+            "claim_b_ro": {
+              "type": "string"
+            },
+            "evidence_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "photo_observation_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "explanation_ro": {
+              "type": "string"
+            },
+            "buyer_impact_ro": {
+              "type": "string"
+            },
+            "verification_action_ro": {
+              "type": "string"
+            },
+            "severity": {
+              "type": "string",
+              "enum": [
+                "CRITICAL",
+                "HIGH",
+                "MEDIUM",
+                "LOW",
+                "INFO"
+              ]
+            },
+            "confidence": {
+              "type": "string",
+              "enum": [
+                "HIGH",
+                "MEDIUM",
+                "LOW"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "title_ro",
+            "category",
+            "status",
+            "claim_a_ro",
+            "claim_b_ro",
+            "evidence_ids",
+            "photo_observation_ids",
+            "explanation_ro",
+            "buyer_impact_ro",
+            "verification_action_ro",
+            "severity",
+            "confidence"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "unverified_claims": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "claim_ro": {
+              "type": "string"
+            },
+            "field": {
+              "type": "string"
+            },
+            "evidence_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "verification_status": {
+              "type": "string",
+              "enum": [
+                "UNVERIFIED",
+                "PARTIALLY_CORROBORATED",
+                "DISPUTED_BY_EVIDENCE"
+              ]
+            },
+            "reason_ro": {
+              "type": "string"
+            },
+            "requested_proof_ro": {
+              "type": "string"
+            },
+            "severity": {
+              "type": "string",
+              "enum": [
+                "CRITICAL",
+                "HIGH",
+                "MEDIUM",
+                "LOW",
+                "INFO"
+              ]
+            },
+            "confidence": {
+              "type": "string",
+              "enum": [
+                "HIGH",
+                "MEDIUM",
+                "LOW"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "claim_ro",
+            "field",
+            "evidence_ids",
+            "verification_status",
+            "reason_ro",
+            "requested_proof_ro",
+            "severity",
+            "confidence"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "missing_information": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "missing_item_ro": {
+              "type": "string"
+            },
+            "category": {
+              "type": "string",
+              "enum": [
+                "IDENTITY",
+                "OWNERSHIP",
+                "MAINTENANCE",
+                "ACCIDENT_HISTORY",
+                "MILEAGE",
+                "WARRANTY",
+                "HYBRID_EV",
+                "PRICE_TERMS",
+                "PHOTOS",
+                "OTHER"
+              ]
+            },
+            "reason_ro": {
+              "type": "string"
+            },
+            "verification_action_ro": {
+              "type": "string"
+            },
+            "severity": {
+              "type": "string",
+              "enum": [
+                "CRITICAL",
+                "HIGH",
+                "MEDIUM",
+                "LOW",
+                "INFO"
+              ]
+            },
+            "related_evidence_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "id",
+            "missing_item_ro",
+            "category",
+            "reason_ro",
+            "verification_action_ro",
+            "severity",
+            "related_evidence_ids"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "listing_risks": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "title_ro": {
+              "type": "string"
+            },
+            "description_ro": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "CONFIRMED_CONTRADICTION",
+                "POSSIBLE_CONTRADICTION",
+                "UNVERIFIED_CLAIM",
+                "INFORMATION_GAP",
+                "VISUAL_CONCERN",
+                "OTHER_CONCERN"
+              ]
+            },
+            "severity": {
+              "type": "string",
+              "enum": [
+                "CRITICAL",
+                "HIGH",
+                "MEDIUM",
+                "LOW",
+                "INFO"
+              ]
+            },
+            "confidence": {
+              "type": "string",
+              "enum": [
+                "HIGH",
+                "MEDIUM",
+                "LOW"
+              ]
+            },
+            "evidence_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "photo_observation_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "related_finding_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "verification_action_ro": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "title_ro",
+            "description_ro",
+            "status",
+            "severity",
+            "confidence",
+            "evidence_ids",
+            "photo_observation_ids",
+            "related_finding_ids",
+            "verification_action_ro"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "visual_evidence_assessment": {
+        "type": "object",
+        "properties": {
+          "images_available": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "images_analyzed": {
+            "type": "integer"
+          },
+          "coverage_status": {
+            "type": "string",
+            "enum": [
+              "ADEQUATE_FOR_LIMITED_REVIEW",
+              "PARTIAL",
+              "INSUFFICIENT_COVERAGE",
+              "NOT_ASSESSED"
+            ]
+          },
+          "visual_concerns": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "observation_id": {
+                  "type": "string"
+                },
+                "image_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "description_ro": {
+                  "type": "string"
+                },
+                "limitation_ro": {
+                  "type": "string"
+                },
+                "severity": {
+                  "type": "string",
+                  "enum": [
+                    "CRITICAL",
+                    "HIGH",
+                    "MEDIUM",
+                    "LOW",
+                    "INFO"
+                  ]
+                }
+              },
+              "required": [
+                "observation_id",
+                "image_id",
+                "description_ro",
+                "limitation_ro",
+                "severity"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "limitations_ro": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "conclusion_ro": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "images_available",
+          "images_analyzed",
+          "coverage_status",
+          "visual_concerns",
+          "limitations_ro",
+          "conclusion_ro"
+        ],
+        "additionalProperties": false
+      },
+      "transparency_assessment": {
+        "type": "object",
+        "properties": {
+          "rating": {
+            "type": "string",
+            "enum": [
+              "HIGH",
+              "MEDIUM",
+              "LOW",
+              "INSUFFICIENT_DATA"
+            ]
+          },
+          "positive_signals_ro": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "negative_signals_ro": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "assessment_ro": {
+            "type": "string"
+          },
+          "evidence_coverage": {
+            "type": "string",
+            "enum": [
+              "GOOD",
+              "PARTIAL",
+              "POOR",
+              "UNKNOWN"
+            ]
+          },
+          "fraud_determination": {
+            "type": "string",
+            "enum": [
+              "NOT_ASSESSED"
+            ]
+          }
+        },
+        "required": [
+          "rating",
+          "positive_signals_ro",
+          "negative_signals_ro",
+          "assessment_ro",
+          "evidence_coverage",
+          "fraud_determination"
+        ],
+        "additionalProperties": false
+      },
+      "audit_summary": {
+        "type": "object",
+        "properties": {
+          "overall_confidence": {
+            "type": "string",
+            "enum": [
+              "HIGH",
+              "MEDIUM",
+              "LOW"
+            ]
+          },
+          "headline_ro": {
+            "type": "string"
+          },
+          "priority_findings_ro": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "critical_missing_proofs_ro": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "recommended_next_step_ro": {
+            "type": "string"
+          },
+          "handoff_finding_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "overall_confidence",
+          "headline_ro",
+          "priority_findings_ro",
+          "critical_missing_proofs_ro",
+          "recommended_next_step_ro",
+          "handoff_finding_ids"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "inconsistencies",
+      "unverified_claims",
+      "missing_information",
+      "listing_risks",
+      "visual_evidence_assessment",
+      "transparency_assessment",
+      "audit_summary"
+    ],
+    "additionalProperties": false
+  }
+}

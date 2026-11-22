@@ -1,0 +1,916 @@
+{
+  "type": "json_schema",
+  "name": "masinapebune_llm1_extraction",
+  "strict": true,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "vehicle": {
+        "type": "object",
+        "properties": {
+          "listing": {
+            "type": "object",
+            "properties": {
+              "listing_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "listing_url": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "source_platform": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "title": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "publication_date": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "last_updated_date": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "location_country": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "location_region": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "location_city": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "advertised_price": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "currency": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "negotiable_price": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "vat_status": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "INCLUDED",
+                  "DEDUCTIBLE",
+                  "EXCLUDED",
+                  "NOT_SPECIFIED",
+                  null
+                ]
+              },
+              "invoice_exchange_rate_surcharge_percent": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "main_image_url": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "listing_id",
+              "listing_url",
+              "source_platform",
+              "title",
+              "publication_date",
+              "last_updated_date",
+              "location_country",
+              "location_region",
+              "location_city",
+              "advertised_price",
+              "currency",
+              "negotiable_price",
+              "vat_status",
+              "invoice_exchange_rate_surcharge_percent",
+              "main_image_url"
+            ],
+            "additionalProperties": false
+          },
+          "identity": {
+            "type": "object",
+            "properties": {
+              "make": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "model": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "generation": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "facelift": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "trim": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "body_style": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "production_year": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "first_registration_date": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "vin": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "registration_country": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "import_country": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "previous_owners": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "make",
+              "model",
+              "generation",
+              "facelift",
+              "trim",
+              "body_style",
+              "production_year",
+              "first_registration_date",
+              "vin",
+              "registration_country",
+              "import_country",
+              "previous_owners"
+            ],
+            "additionalProperties": false
+          },
+          "powertrain": {
+            "type": "object",
+            "properties": {
+              "fuel_type": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "PETROL",
+                  "DIESEL",
+                  "ELECTRIC",
+                  "HEV",
+                  "PHEV",
+                  "MHEV",
+                  "LPG",
+                  "CNG",
+                  "OTHER",
+                  null
+                ]
+              },
+              "engine_displacement_cc": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "engine_family": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "engine_code": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "engine_description": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "engine_power_hp": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "engine_power_kw": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "torque_nm": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "emissions_standard": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "transmission_type": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "MANUAL",
+                  "AUTOMATIC",
+                  "CVT",
+                  "DCT",
+                  "OTHER",
+                  null
+                ]
+              },
+              "transmission_model": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "transmission_gears": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "drivetrain": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "FWD",
+                  "RWD",
+                  "AWD",
+                  "4WD",
+                  null
+                ]
+              },
+              "hybrid_system": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "battery_capacity_kwh": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "electric_range_km": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "fuel_type",
+              "engine_displacement_cc",
+              "engine_family",
+              "engine_code",
+              "engine_description",
+              "engine_power_hp",
+              "engine_power_kw",
+              "torque_nm",
+              "emissions_standard",
+              "transmission_type",
+              "transmission_model",
+              "transmission_gears",
+              "drivetrain",
+              "hybrid_system",
+              "battery_capacity_kwh",
+              "electric_range_km"
+            ],
+            "additionalProperties": false
+          },
+          "usage": {
+            "type": "object",
+            "properties": {
+              "odometer_km": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "service_history_claim": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "last_service_date": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "last_service_km": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "timing_system_history": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "transmission_service_history": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "accident_free_claim": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "damage_history_claim": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "mechanical_condition_claim": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "cosmetic_condition_claim": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "inspection_valid_until": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "warranty_months": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "warranty_details": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "keys_count": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "tire_condition_claim": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "brake_condition_claim": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "odometer_km",
+              "service_history_claim",
+              "last_service_date",
+              "last_service_km",
+              "timing_system_history",
+              "transmission_service_history",
+              "accident_free_claim",
+              "damage_history_claim",
+              "mechanical_condition_claim",
+              "cosmetic_condition_claim",
+              "inspection_valid_until",
+              "warranty_months",
+              "warranty_details",
+              "keys_count",
+              "tire_condition_claim",
+              "brake_condition_claim"
+            ],
+            "additionalProperties": false
+          },
+          "equipment": {
+            "type": "object",
+            "properties": {
+              "safety": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "driver_assistance": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "comfort": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "infotainment": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "optional_equipment": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "special_features": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "safety",
+              "driver_assistance",
+              "comfort",
+              "infotainment",
+              "optional_equipment",
+              "special_features"
+            ],
+            "additionalProperties": false
+          },
+          "seller": {
+            "type": "object",
+            "properties": {
+              "seller_type": {
+                "type": "string",
+                "enum": [
+                  "PRIVATE",
+                  "DEALER",
+                  "COMPANY",
+                  "UNKNOWN"
+                ]
+              },
+              "dealer_name": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "seller_location": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "financing_available": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "invoice_available": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "return_policy_claim": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "warranty_claim": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "seller_type",
+              "dealer_name",
+              "seller_location",
+              "financing_available",
+              "invoice_available",
+              "return_policy_claim",
+              "warranty_claim"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "listing",
+          "identity",
+          "powertrain",
+          "usage",
+          "equipment",
+          "seller"
+        ],
+        "additionalProperties": false
+      },
+      "listing_evidence": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "field": {
+              "type": "string"
+            },
+            "normalized_value": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "exact_quote": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "source_type": {
+              "type": "string",
+              "enum": [
+                "TITLE",
+                "DESCRIPTION",
+                "SPECIFICATIONS",
+                "EQUIPMENT",
+                "SELLER",
+                "PRICE",
+                "WARRANTY",
+                "DOCUMENT",
+                "OCR",
+                "OTHER"
+              ]
+            },
+            "source_id": {
+              "type": "string"
+            },
+            "evidence_status": {
+              "type": "string",
+              "enum": [
+                "DECLARED",
+                "OBSERVED",
+                "VERIFIED",
+                "INFERRED",
+                "UNKNOWN"
+              ]
+            },
+            "extraction_confidence": {
+              "type": "string",
+              "enum": [
+                "HIGH",
+                "MEDIUM",
+                "LOW"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "field",
+            "normalized_value",
+            "exact_quote",
+            "source_type",
+            "source_id",
+            "evidence_status",
+            "extraction_confidence"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "photo_analysis": {
+        "type": "object",
+        "properties": {
+          "images_available": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "images_analyzed": {
+            "type": "integer"
+          },
+          "image_summaries": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "image_id": {
+                  "type": "string"
+                },
+                "view": {
+                  "type": "string",
+                  "enum": [
+                    "FRONT",
+                    "REAR",
+                    "SIDE",
+                    "EXTERIOR_OTHER",
+                    "INTERIOR",
+                    "DASHBOARD",
+                    "ENGINE_BAY",
+                    "WHEELS",
+                    "DOCUMENT",
+                    "OTHER",
+                    "UNKNOWN"
+                  ]
+                },
+                "readability": {
+                  "type": "string",
+                  "enum": [
+                    "GOOD",
+                    "PARTIAL",
+                    "POOR"
+                  ]
+                },
+                "limitations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "image_id",
+                "view",
+                "readability",
+                "limitations"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "photo_observations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "image_id": {
+                  "type": "string"
+                },
+                "category": {
+                  "type": "string",
+                  "enum": [
+                    "BODY",
+                    "PAINT",
+                    "GLASS",
+                    "LIGHTS",
+                    "WHEELS",
+                    "TIRES",
+                    "INTERIOR",
+                    "DASHBOARD",
+                    "ODOMETER",
+                    "ENGINE_BAY",
+                    "CHARGING",
+                    "EQUIPMENT",
+                    "OTHER"
+                  ]
+                },
+                "finding_type": {
+                  "type": "string",
+                  "enum": [
+                    "VISIBLE_FEATURE",
+                    "POTENTIAL_ANOMALY",
+                    "VISIBLE_DAMAGE",
+                    "NOT_VERIFIABLE"
+                  ]
+                },
+                "description_ro": {
+                  "type": "string"
+                },
+                "visible_evidence_ro": {
+                  "type": "string"
+                },
+                "severity": {
+                  "type": "string",
+                  "enum": [
+                    "INFO",
+                    "LOW",
+                    "MEDIUM",
+                    "HIGH"
+                  ]
+                },
+                "confidence": {
+                  "type": "string",
+                  "enum": [
+                    "HIGH",
+                    "MEDIUM",
+                    "LOW"
+                  ]
+                },
+                "limitation_ro": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "image_id",
+                "category",
+                "finding_type",
+                "description_ro",
+                "visible_evidence_ro",
+                "severity",
+                "confidence",
+                "limitation_ro"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "coverage_limitations_ro": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "images_available",
+          "images_analyzed",
+          "image_summaries",
+          "photo_observations",
+          "coverage_limitations_ro"
+        ],
+        "additionalProperties": false
+      },
+      "extraction_quality": {
+        "type": "object",
+        "properties": {
+          "overall_confidence": {
+            "type": "string",
+            "enum": [
+              "HIGH",
+              "MEDIUM",
+              "LOW"
+            ]
+          },
+          "critical_missing_fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ambiguous_fields": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "field": {
+                  "type": "string"
+                },
+                "reason_ro": {
+                  "type": "string"
+                },
+                "evidence_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "field",
+                "reason_ro",
+                "evidence_ids"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "limitations_ro": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "essential_identity_sufficient": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "overall_confidence",
+          "critical_missing_fields",
+          "ambiguous_fields",
+          "limitations_ro",
+          "essential_identity_sufficient"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "vehicle",
+      "listing_evidence",
+      "photo_analysis",
+      "extraction_quality"
+    ],
+    "additionalProperties": false
+  }
+}

@@ -1,0 +1,633 @@
+{
+  "type": "json_schema",
+  "name": "masinapebune_llm5_final_synthesis",
+  "strict": true,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "executive_summary": {
+        "type": "object",
+        "properties": {
+          "headline_ro": {
+            "type": "string"
+          },
+          "overview_ro": {
+            "type": "string"
+          },
+          "main_strengths_ro": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "main_concerns_ro": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "critical_unknowns_ro": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "headline_ro",
+          "overview_ro",
+          "main_strengths_ro",
+          "main_concerns_ro",
+          "critical_unknowns_ro"
+        ],
+        "additionalProperties": false
+      },
+      "score_explanation": {
+        "type": "object",
+        "properties": {
+          "score_100": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "score_label_ro": {
+            "type": "string"
+          },
+          "components": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "criterion": {
+                  "type": "string",
+                  "enum": [
+                    "LISTING_CONSISTENCY",
+                    "HISTORY_TRACEABILITY",
+                    "TECHNICAL_TRANSPARENCY",
+                    "MARKET_PRICE_EVIDENCE",
+                    "VISUAL_EVIDENCE"
+                  ]
+                },
+                "score": {
+                  "type": "integer"
+                },
+                "maximum": {
+                  "type": "integer"
+                },
+                "explanation_ro": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "criterion",
+                "score",
+                "maximum",
+                "explanation_ro"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "methodology_ro": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "limitations_ro": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "score_100",
+          "score_label_ro",
+          "components",
+          "methodology_ro",
+          "limitations_ro"
+        ],
+        "additionalProperties": false
+      },
+      "key_findings": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "POSITIVE",
+                "CONCERN",
+                "MISSING_EVIDENCE"
+              ]
+            },
+            "title_ro": {
+              "type": "string"
+            },
+            "explanation_ro": {
+              "type": "string"
+            },
+            "priority": {
+              "type": "string",
+              "enum": [
+                "CRITICAL",
+                "HIGH",
+                "MEDIUM",
+                "LOW"
+              ]
+            },
+            "evidence_status": {
+              "type": "string",
+              "enum": [
+                "OBSERVED",
+                "DECLARED",
+                "VERIFIED",
+                "INFERRED",
+                "UNKNOWN"
+              ]
+            },
+            "source_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "upstream_finding_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "next_action_ro": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "type",
+            "title_ro",
+            "explanation_ro",
+            "priority",
+            "evidence_status",
+            "source_ids",
+            "upstream_finding_ids",
+            "next_action_ro"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "seller_questions": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "priority": {
+              "type": "string",
+              "enum": [
+                "CRITICAL",
+                "HIGH",
+                "MEDIUM",
+                "LOW"
+              ]
+            },
+            "category": {
+              "type": "string",
+              "enum": [
+                "IDENTITY",
+                "HISTORY",
+                "MAINTENANCE",
+                "ACCIDENTS",
+                "MECHANICAL",
+                "HYBRID_EV",
+                "DOCUMENTS",
+                "EQUIPMENT",
+                "PRICE",
+                "WARRANTY",
+                "OTHER"
+              ]
+            },
+            "question_ro": {
+              "type": "string"
+            },
+            "why_it_matters_ro": {
+              "type": "string"
+            },
+            "satisfactory_answer_ro": {
+              "type": "string"
+            },
+            "warning_signs_ro": {
+              "type": "string"
+            },
+            "related_finding_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "source_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "id",
+            "priority",
+            "category",
+            "question_ro",
+            "why_it_matters_ro",
+            "satisfactory_answer_ro",
+            "warning_signs_ro",
+            "related_finding_ids",
+            "source_ids"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "seller_message_ro": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "inspection_checklist": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "priority": {
+              "type": "string",
+              "enum": [
+                "CRITICAL",
+                "HIGH",
+                "MEDIUM",
+                "LOW"
+              ]
+            },
+            "category": {
+              "type": "string",
+              "enum": [
+                "DOCUMENTS",
+                "VIN",
+                "MAINTENANCE",
+                "ENGINE",
+                "TRANSMISSION",
+                "HYBRID_EV",
+                "BODYWORK",
+                "TIRES_BRAKES",
+                "ELECTRONICS",
+                "TEST_DRIVE",
+                "DIAGNOSTICS",
+                "RECALLS",
+                "OTHER"
+              ]
+            },
+            "check_ro": {
+              "type": "string"
+            },
+            "why_ro": {
+              "type": "string"
+            },
+            "performed_by": {
+              "type": "string",
+              "enum": [
+                "BUYER",
+                "INDEPENDENT_MECHANIC",
+                "DEALER",
+                "DOCUMENT_PROVIDER"
+              ]
+            },
+            "related_finding_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "source_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "id",
+            "priority",
+            "category",
+            "check_ro",
+            "why_ro",
+            "performed_by",
+            "related_finding_ids",
+            "source_ids"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "negotiation_strategy": {
+        "type": "object",
+        "properties": {
+          "position_ro": {
+            "type": "string"
+          },
+          "target_price": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "target_currency": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "target_price_basis_ro": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "arguments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "priority": {
+                  "type": "string",
+                  "enum": [
+                    "CRITICAL",
+                    "HIGH",
+                    "MEDIUM",
+                    "LOW"
+                  ]
+                },
+                "argument_ro": {
+                  "type": "string"
+                },
+                "evidence_ro": {
+                  "type": "string"
+                },
+                "seller_message_ro": {
+                  "type": "string"
+                },
+                "prerequisite_ro": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "source_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "related_finding_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "id",
+                "priority",
+                "argument_ro",
+                "evidence_ro",
+                "seller_message_ro",
+                "prerequisite_ro",
+                "source_ids",
+                "related_finding_ids"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "limitations_ro": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "position_ro",
+          "target_price",
+          "target_currency",
+          "target_price_basis_ro",
+          "arguments",
+          "limitations_ro"
+        ],
+        "additionalProperties": false
+      },
+      "ownership_cost_guidance": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "category": {
+              "type": "string",
+              "enum": [
+                "FUEL",
+                "ELECTRICITY",
+                "INSURANCE",
+                "TAX",
+                "ROUTINE_SERVICE",
+                "PREVENTIVE_SERVICE",
+                "POSSIBLE_REPAIR",
+                "OTHER"
+              ]
+            },
+            "description_ro": {
+              "type": "string"
+            },
+            "amount_min": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "amount_max": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "currency": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "period": {
+              "type": "string",
+              "enum": [
+                "ONE_TIME",
+                "ANNUAL",
+                "MONTHLY",
+                "UNKNOWN"
+              ]
+            },
+            "assumptions_ro": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "source_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "verification_ro": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "category",
+            "description_ro",
+            "amount_min",
+            "amount_max",
+            "currency",
+            "period",
+            "assumptions_ro",
+            "source_ids",
+            "verification_ro"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "final_verdict": {
+        "type": "object",
+        "properties": {
+          "recommendation": {
+            "type": "string",
+            "enum": [
+              "SHORTLIST",
+              "NEGOTIATE",
+              "VERIFY_FIRST",
+              "AVOID",
+              "INSUFFICIENT_DATA"
+            ]
+          },
+          "one_sentence_ro": {
+            "type": "string"
+          },
+          "rationale_ro": {
+            "type": "string"
+          },
+          "confidence": {
+            "type": "string",
+            "enum": [
+              "HIGH",
+              "MEDIUM",
+              "LOW",
+              "INSUFFICIENT"
+            ]
+          },
+          "main_reasons_ro": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "recommended_next_action_ro": {
+            "type": "string"
+          },
+          "conditions_to_reconsider_ro": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "is_documentary_screening_only": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "recommendation",
+          "one_sentence_ro",
+          "rationale_ro",
+          "confidence",
+          "main_reasons_ro",
+          "recommended_next_action_ro",
+          "conditions_to_reconsider_ro",
+          "is_documentary_screening_only"
+        ],
+        "additionalProperties": false
+      },
+      "report_limitations": {
+        "type": "object",
+        "properties": {
+          "missing_modules": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "critical_evidence_gaps_ro": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "photo_coverage_ro": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "market_coverage_ro": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "technical_coverage_ro": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "disclaimer_ro": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "missing_modules",
+          "critical_evidence_gaps_ro",
+          "photo_coverage_ro",
+          "market_coverage_ro",
+          "technical_coverage_ro",
+          "disclaimer_ro"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "executive_summary",
+      "score_explanation",
+      "key_findings",
+      "seller_questions",
+      "seller_message_ro",
+      "inspection_checklist",
+      "negotiation_strategy",
+      "ownership_cost_guidance",
+      "final_verdict",
+      "report_limitations"
+    ],
+    "additionalProperties": false
+  }
+}

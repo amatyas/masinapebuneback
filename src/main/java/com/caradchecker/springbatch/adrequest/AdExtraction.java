@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "ad_check_extractions", uniqueConstraints = @UniqueConstraint(columnNames = { "request_id", "provider" }))
+	@Table(name = "ad_check_extractions", uniqueConstraints = @UniqueConstraint(columnNames = { "request_id", "stage" }))
 public class AdExtraction {
 
 	@Id
@@ -25,6 +25,9 @@ public class AdExtraction {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "provider", length = 16, nullable = false, updatable = false)
 	private ExtractionProvider provider;
+
+	@Column(name = "stage", length = 32, nullable = false, updatable = false)
+	private String stage;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "status", length = 16, nullable = false)
@@ -45,11 +48,12 @@ public class AdExtraction {
 	protected AdExtraction() {
 	}
 
-	public AdExtraction(String requestId, ExtractionProvider provider, ExtractionStatus status, String resultJson,
+	public AdExtraction(String requestId, ExtractionProvider provider, String stage, ExtractionStatus status, String resultJson,
 			String errorMessage, long durationMs) {
 		this.id = UUID.randomUUID().toString();
 		this.requestId = requestId;
 		this.provider = provider;
+		this.stage = stage;
 		this.status = status;
 		this.resultJson = resultJson;
 		this.errorMessage = errorMessage;
@@ -57,8 +61,16 @@ public class AdExtraction {
 		this.createdAt = LocalDateTime.now();
 	}
 
+	public String getRequestId() {
+		return requestId;
+	}
+
 	public ExtractionProvider getProvider() {
 		return provider;
+	}
+
+	public String getStage() {
+		return stage;
 	}
 
 	public ExtractionStatus getStatus() {

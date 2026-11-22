@@ -16,31 +16,40 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 public class GeminiStructuredClient {
 
 	private final LlmProperties properties;
-	private final CarAdSchema schema;
 	private final ObjectMapper objectMapper;
 	private final HttpClient httpClient;
 
-	public GeminiStructuredClient(LlmProperties properties, CarAdSchema schema, ObjectMapper objectMapper, HttpClient llmHttpClient) {
+	public GeminiStructuredClient(LlmProperties properties, ObjectMapper objectMapper, HttpClient llmHttpClient) {
 		this.properties = properties;
-		this.schema = schema;
 		this.objectMapper = objectMapper;
 		this.httpClient = llmHttpClient;
 	}
 
-	public JsonNode extractFromLink(String url) {
-		return generate(buildLinkBody(url));
+	public JsonNode complete(String systemPrompt, String userPrompt, JsonNode schema, boolean openUrl, String model) {
+		return generate(build(systemPrompt, userPrompt, schema, openUrl), model);
 	}
 
-	public JsonNode extractFromPage(String url, String pageContent) {
-		return generate(buildPageBody(url, pageContent));
+	private String build(String systemPrompt, String userPrompt, JsonNode schema, boolean openUrl) {
+		ObjectNode body = objectMapper.createObjectNode();
+		ArrayNode system = body.putObject("systemInstruction").putArray("parts");
+		system.addObject().put("text", systemPrompt);
+		ArrayNode parts = body.putArray("contents").addObject().putArray("parts");
+		parts.addObject().put("text", userPrompt);
+		if (openUrl) {
+			body.putArray("tools").addObject().putObject("urlContext");
+		}
+		ObjectNode text = body.putObject("generationConfig").putObject("responseFormat").putObject("text");
+		text.put("mimeType", "APPLICATION_JSON");
+		text.set("schema", schema);
+		return write(body);
 	}
 
-	private JsonNode generate(String body) {
+	private JsonNode generate(String body, String modelOverride) {
 		LlmProperties.Provider provider = properties.getGemini();
 		if (!provider.hasApiKey()) {
 			throw new IllegalStateException("Clé API Gemini absente (GEMINI_API_KEY)");
 		}
-		String model = blankToDefault(provider.getModel(), "gemini-3.5-flash");
+		String model = modelOverride == null || modelOverride.isBlank() ? blankToDefault(provider.getModel(), "gemini-3.5-flash") : modelOverride;
 		String base = blankToDefault(provider.getUrl(), "https://generativelanguage.googleapis.com/v1beta");
 		if (base.endsWith("/")) {
 			base = base.substring(0, base.length() - 1);
@@ -51,27 +60,6 @@ public class GeminiStructuredClient {
 				Map.of("x-goog-api-key", provider.getApiKey()),
 				body);
 		return readStructuredJson(response);
-	}
-
-	private String buildLinkBody(String url) {
-		ObjectNode body = baseBody(CarAdSchema.promptForUrl(url));
-		body.putArray("tools").addObject().putObject("urlContext");
-		return write(body);
-	}
-
-	private String buildPageBody(String url, String pageContent) {
-		return write(baseBody(CarAdSchema.prompt(url, pageContent)));
-	}
-
-	private ObjectNode baseBody(String prompt) {
-		ObjectNode body = objectMapper.createObjectNode();
-		ArrayNode contents = body.putArray("contents");
-		ArrayNode parts = contents.addObject().putArray("parts");
-		parts.addObject().put("text", prompt);
-		ObjectNode text = body.putObject("generationConfig").putObject("responseFormat").putObject("text");
-		text.put("mimeType", "APPLICATION_JSON");
-		text.set("schema", schema.copy());
-		return body;
 	}
 
 	private String write(ObjectNode body) {

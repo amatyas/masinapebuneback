@@ -9,29 +9,44 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @Component
 public class OpenAiStructuredClient {
 
 	private final LlmProperties properties;
-	private final CarAdSchema schema;
 	private final ObjectMapper objectMapper;
 	private final HttpClient httpClient;
 
-	public OpenAiStructuredClient(LlmProperties properties, CarAdSchema schema, ObjectMapper objectMapper, HttpClient llmHttpClient) {
+	public OpenAiStructuredClient(LlmProperties properties, ObjectMapper objectMapper, HttpClient llmHttpClient) {
 		this.properties = properties;
-		this.schema = schema;
 		this.objectMapper = objectMapper;
 		this.httpClient = llmHttpClient;
 	}
 
-	public JsonNode extractFromLink(String url) {
-		return generate(buildLinkBody(url));
+	public JsonNode complete(String systemPrompt, String userPrompt, JsonNode format, boolean openUrl, String url, String model) {
+		return generate(build(systemPrompt, userPrompt, format, openUrl, model));
 	}
 
-	public JsonNode extractFromPage(String url, String pageContent) {
-		return generate(buildPageBody(url, pageContent));
+	private String build(String systemPrompt, String userPrompt, JsonNode format, boolean openUrl, String model) {
+		LlmProperties.Provider provider = properties.getOpenai();
+		ObjectNode body = objectMapper.createObjectNode();
+		body.put("model", blankToDefault(model, blankToDefault(provider.getModel(), "gpt-6.2-astra")));
+		body.put("store", false);
+		ArrayNode input = body.putArray("input");
+		input.addObject().put("role", "system").putArray("content").addObject().put("type", "input_text").put("text", systemPrompt);
+		ObjectNode user = input.addObject();
+		user.put("role", "user");
+		ArrayNode userContent = user.putArray("content");
+		userContent.addObject().put("type", "input_text").put("text", userPrompt);
+		if (openUrl) {
+			ObjectNode tool = body.putArray("tools").addObject();
+			tool.put("type", "web_search");
+			tool.put("external_web_access", true);
+		}
+		body.putObject("text").set("format", format);
+		return write(body);
 	}
 
 	private JsonNode generate(String body) {
@@ -46,33 +61,6 @@ public class OpenAiStructuredClient {
 				Map.of("Authorization", "Bearer " + provider.getApiKey()),
 				body);
 		return readStructuredJson(response);
-	}
-
-	private String buildLinkBody(String url) {
-		ObjectNode body = baseBody(CarAdSchema.promptForUrl(url));
-		ObjectNode tool = body.putArray("tools").addObject();
-		tool.put("type", "web_search");
-		tool.put("external_web_access", true);
-		tool.putObject("filters").putArray("allowed_domains").add(host(url));
-		return write(body);
-	}
-
-	private String buildPageBody(String url, String pageContent) {
-		return write(baseBody(CarAdSchema.prompt(url, pageContent)));
-	}
-
-	private ObjectNode baseBody(String prompt) {
-		LlmProperties.Provider provider = properties.getOpenai();
-		ObjectNode body = objectMapper.createObjectNode();
-		body.put("model", blankToDefault(provider.getModel(), "gpt-6.2-astra"));
-		body.put("store", false);
-		body.put("input", prompt);
-		ObjectNode format = body.putObject("text").putObject("format");
-		format.put("type", "json_schema");
-		format.put("name", "car_ad");
-		format.put("strict", true);
-		format.set("schema", schema.copy());
-		return body;
 	}
 
 	private String write(ObjectNode body) {

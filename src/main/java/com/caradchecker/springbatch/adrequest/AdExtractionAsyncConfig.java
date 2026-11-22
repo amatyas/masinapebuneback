@@ -26,6 +26,17 @@ public class AdExtractionAsyncConfig {
 		return executor;
 	}
 
+	@Bean(name = "llmStageExecutor")
+	public Executor llmStageExecutor() {
+		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+		executor.setCorePoolSize(6);
+		executor.setMaxPoolSize(12);
+		executor.setQueueCapacity(100);
+		executor.setThreadNamePrefix("llm-stage-");
+		executor.initialize();
+		return executor;
+	}
+
 	@Bean
 	public HttpClient llmHttpClient() {
 		return HttpClient.newBuilder()

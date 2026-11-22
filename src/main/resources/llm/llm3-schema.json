@@ -1,0 +1,472 @@
+{
+  "type": "json_schema",
+  "name": "masinapebune_llm3_market_analysis",
+  "strict": true,
+  "schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "vehicle_market_identity": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "vehicle_label": {
+            "type": "string"
+          },
+          "target_market": {
+            "type": "string"
+          },
+          "asking_price": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "asking_currency": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "vat_basis": {
+            "type": "string",
+            "enum": [
+              "GROSS",
+              "NET",
+              "UNKNOWN"
+            ]
+          }
+        },
+        "required": [
+          "vehicle_label",
+          "target_market",
+          "asking_price",
+          "asking_currency",
+          "vat_basis"
+        ]
+      },
+      "market_data_coverage": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "comparables_received": {
+            "type": "integer"
+          },
+          "comparables_strong": {
+            "type": "integer"
+          },
+          "comparables_moderate": {
+            "type": "integer"
+          },
+          "comparables_weak": {
+            "type": "integer"
+          },
+          "comparables_excluded": {
+            "type": "integer"
+          },
+          "retrieved_at": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "evidence_sufficiency": {
+            "type": "string",
+            "enum": [
+              "SUFFICIENT",
+              "LIMITED",
+              "INSUFFICIENT"
+            ]
+          },
+          "coverage_explanation_ro": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "comparables_received",
+          "comparables_strong",
+          "comparables_moderate",
+          "comparables_weak",
+          "comparables_excluded",
+          "retrieved_at",
+          "evidence_sufficiency",
+          "coverage_explanation_ro"
+        ]
+      },
+      "comparable_assessments": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "comparable_id": {
+              "type": "string"
+            },
+            "source": {
+              "type": "string"
+            },
+            "url": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "match_quality": {
+              "type": "string",
+              "enum": [
+                "STRONG",
+                "MODERATE",
+                "WEAK",
+                "EXCLUDE"
+              ]
+            },
+            "is_included_in_reference": {
+              "type": "boolean"
+            },
+            "differences": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "strengths": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "reason_ro": {
+              "type": "string"
+            },
+            "price_eur": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "year": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "mileage_km": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "retrieved_at": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "comparable_id",
+            "source",
+            "url",
+            "match_quality",
+            "is_included_in_reference",
+            "differences",
+            "strengths",
+            "reason_ro",
+            "price_eur",
+            "year",
+            "mileage_km",
+            "retrieved_at"
+          ]
+        }
+      },
+      "market_valuation": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "market_reference_price": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "market_low": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "market_high": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "reference_currency": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "difference_amount": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "difference_percent": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "price_assessment": {
+            "type": "string",
+            "enum": [
+              "VERY_GOOD",
+              "GOOD",
+              "FAIR",
+              "EXPENSIVE",
+              "VERY_EXPENSIVE",
+              "UNKNOWN"
+            ]
+          },
+          "confidence": {
+            "type": "string",
+            "enum": [
+              "HIGH",
+              "MEDIUM",
+              "LOW",
+              "INSUFFICIENT"
+            ]
+          },
+          "methodology_ro": {
+            "type": "string"
+          },
+          "interpretation_ro": {
+            "type": "string"
+          },
+          "limitations_ro": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "market_reference_price",
+          "market_low",
+          "market_high",
+          "reference_currency",
+          "difference_amount",
+          "difference_percent",
+          "price_assessment",
+          "confidence",
+          "methodology_ro",
+          "interpretation_ro",
+          "limitations_ro"
+        ]
+      },
+      "third_party_valuations": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "source_id": {
+              "type": "string"
+            },
+            "provider": {
+              "type": "string"
+            },
+            "retrieved_at": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "currency": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "estimated_price": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "rating_label": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "interpretation_ro": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "source_id",
+            "provider",
+            "retrieved_at",
+            "currency",
+            "estimated_price",
+            "rating_label",
+            "interpretation_ro"
+          ]
+        }
+      },
+      "negotiation_arguments": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "priority": {
+              "type": "string",
+              "enum": [
+                "HIGH",
+                "MEDIUM",
+                "LOW"
+              ]
+            },
+            "title_ro": {
+              "type": "string"
+            },
+            "explanation_ro": {
+              "type": "string"
+            },
+            "action_ro": {
+              "type": "string"
+            },
+            "suggested_discount_eur": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "evidence_refs": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "source_id": {
+                    "type": "string"
+                  },
+                  "source_type": {
+                    "type": "string",
+                    "enum": [
+                      "COMPARABLE",
+                      "VALUATION",
+                      "LISTING_EVIDENCE",
+                      "CALCULATION"
+                    ]
+                  },
+                  "note": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "source_type",
+                  "note"
+                ]
+              }
+            }
+          },
+          "required": [
+            "id",
+            "priority",
+            "title_ro",
+            "explanation_ro",
+            "action_ro",
+            "suggested_discount_eur",
+            "evidence_refs"
+          ]
+        }
+      },
+      "data_quality_flags": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "code": {
+              "type": "string",
+              "enum": [
+                "INSUFFICIENT_COMPARABLES",
+                "WEAK_MATCHES",
+                "STALE_DATA",
+                "DUPLICATE_LISTINGS",
+                "MIXED_CURRENCY",
+                "VAT_INCONSISTENCY",
+                "MISSING_ATTRIBUTES",
+                "CONFLICTING_CALCULATIONS",
+                "OTHER"
+              ]
+            },
+            "description_ro": {
+              "type": "string"
+            },
+            "affected_comparable_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "code",
+            "description_ro",
+            "affected_comparable_ids"
+          ]
+        }
+      },
+      "market_summary": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "headline_ro": {
+            "type": "string"
+          },
+          "main_findings_ro": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "main_uncertainties_ro": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "conclusion_for_verdict_ro": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "headline_ro",
+          "main_findings_ro",
+          "main_uncertainties_ro",
+          "conclusion_for_verdict_ro"
+        ]
+      }
+    },
+    "required": [
+      "vehicle_market_identity",
+      "market_data_coverage",
+      "comparable_assessments",
+      "market_valuation",
+      "third_party_valuations",
+      "negotiation_arguments",
+      "data_quality_flags",
+      "market_summary"
+    ]
+  }
+}

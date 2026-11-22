@@ -36,37 +36,6 @@
 
 	</appender>
 
-	<appender name="activedir-appender"
-		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${LOG_FOLDER}/batch-sync-ldap.log</file>
-		<encoder
-			class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-			<Pattern>
-				%d{yyyy-MM-dd HH:mm:ss} [%thread] %level %logger.%M:%line -
-				%msg%n
-			</Pattern>
-		</encoder>
-
-		<rollingPolicy
-			class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-			<FileNamePattern>${LOG_FOLDER}/batch-sync-ldap.%i.log.zip
-			</FileNamePattern>
-			<MinIndex>1</MinIndex>
-			<MaxIndex>10</MaxIndex>
-		</rollingPolicy>
-
-		<triggeringPolicy
-			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-			<MaxFileSize>10MB</MaxFileSize>
-		</triggeringPolicy>
-	</appender>
-
-	<!-- <logger name="com.visiologic.springbatch.activedirectory" level="debug" 
-		additivity="false"> <appender-ref ref="activedir-appender" /> </logger> -->
-<!-- 	<logger -->
-<!-- 		name="com.visiologic.springbatch" level="INFO"> -->
-<!-- 		<appender-ref ref="all-appender" /> -->
-<!-- 	</logger> -->
 	<root level="INFO">
 		<appender-ref ref="CONSOLE" />
 		<appender-ref ref="all-appender" />

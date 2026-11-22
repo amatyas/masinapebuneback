@@ -1,0 +1,649 @@
+{
+  "type": "json_schema",
+  "name": "masinapebune_llm2_technical_analysis",
+  "strict": true,
+  "schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "vehicle_configuration": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "make": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "model": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "generation": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "production_year": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "engine_family": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "engine_code": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "fuel_type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "transmission": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "hybrid_system": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "configuration_certainty": {
+            "type": "string",
+            "enum": [
+              "HIGH",
+              "MEDIUM",
+              "LOW",
+              "UNKNOWN"
+            ]
+          },
+          "ambiguities_ro": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "make",
+          "model",
+          "generation",
+          "production_year",
+          "engine_family",
+          "engine_code",
+          "fuel_type",
+          "transmission",
+          "hybrid_system",
+          "configuration_certainty",
+          "ambiguities_ro"
+        ]
+      },
+      "evidence_coverage": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "technical_sources_status": {
+            "type": "string",
+            "enum": [
+              "SUFFICIENT",
+              "PARTIAL",
+              "NONE"
+            ]
+          },
+          "recall_sources_status": {
+            "type": "string",
+            "enum": [
+              "SUFFICIENT",
+              "PARTIAL",
+              "NONE"
+            ]
+          },
+          "repair_cost_sources_status": {
+            "type": "string",
+            "enum": [
+              "SUFFICIENT",
+              "PARTIAL",
+              "NONE"
+            ]
+          },
+          "limitations_ro": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "missing_information_ro": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "technical_sources_status",
+          "recall_sources_status",
+          "repair_cost_sources_status",
+          "limitations_ro",
+          "missing_information_ro"
+        ]
+      },
+      "known_issues": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "component": {
+              "type": "string"
+            },
+            "title_ro": {
+              "type": "string"
+            },
+            "failure_mode_ro": {
+              "type": "string"
+            },
+            "affected_configurations_ro": {
+              "type": "string"
+            },
+            "symptoms_ro": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "consequences_ro": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "risk_factors_ro": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "applicability": {
+              "type": "string",
+              "enum": [
+                "CONFIRMED_CONFIGURATION",
+                "POSSIBLE_CONFIGURATION",
+                "NOT_ESTABLISHED",
+                "NOT_APPLICABLE"
+              ]
+            },
+            "severity": {
+              "type": "string",
+              "enum": [
+                "CRITICAL",
+                "HIGH",
+                "MEDIUM",
+                "LOW",
+                "INFO"
+              ]
+            },
+            "confidence": {
+              "type": "string",
+              "enum": [
+                "HIGH",
+                "MEDIUM",
+                "LOW",
+                "UNKNOWN"
+              ]
+            },
+            "evidence_status": {
+              "type": "string",
+              "enum": [
+                "DECLARED",
+                "DOCUMENTED",
+                "OBSERVED",
+                "VERIFIED",
+                "INFERRED",
+                "UNKNOWN"
+              ]
+            },
+            "source_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "seller_evidence_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "diagnostic_checks_ro": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "vehicle_defect_confirmed": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "id",
+            "component",
+            "title_ro",
+            "failure_mode_ro",
+            "affected_configurations_ro",
+            "symptoms_ro",
+            "consequences_ro",
+            "risk_factors_ro",
+            "applicability",
+            "severity",
+            "confidence",
+            "evidence_status",
+            "source_ids",
+            "seller_evidence_ids",
+            "diagnostic_checks_ro",
+            "vehicle_defect_confirmed"
+          ]
+        }
+      },
+      "recalls": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "campaign_reference": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "title_ro": {
+              "type": "string"
+            },
+            "affected_configurations_ro": {
+              "type": "string"
+            },
+            "applicability": {
+              "type": "string",
+              "enum": [
+                "CONFIRMED_CONFIGURATION",
+                "POSSIBLE_CONFIGURATION",
+                "NOT_ESTABLISHED",
+                "NOT_APPLICABLE"
+              ]
+            },
+            "vin_specific_status": {
+              "type": "string",
+              "enum": [
+                "OPEN",
+                "COMPLETED",
+                "NOT_APPLICABLE",
+                "UNKNOWN"
+              ]
+            },
+            "completion_evidence_status": {
+              "type": "string",
+              "enum": [
+                "DECLARED",
+                "DOCUMENTED",
+                "OBSERVED",
+                "VERIFIED",
+                "INFERRED",
+                "UNKNOWN"
+              ]
+            },
+            "safety_impact_ro": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "required_action_ro": {
+              "type": "string"
+            },
+            "source_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "confidence": {
+              "type": "string",
+              "enum": [
+                "HIGH",
+                "MEDIUM",
+                "LOW",
+                "UNKNOWN"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "campaign_reference",
+            "title_ro",
+            "affected_configurations_ro",
+            "applicability",
+            "vin_specific_status",
+            "completion_evidence_status",
+            "safety_impact_ro",
+            "required_action_ro",
+            "source_ids",
+            "confidence"
+          ]
+        }
+      },
+      "maintenance_assessment": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "component": {
+              "type": "string"
+            },
+            "category": {
+              "type": "string",
+              "enum": [
+                "ROUTINE",
+                "PREVENTIVE",
+                "DIAGNOSTIC",
+                "CONFIRMED_REPAIR"
+              ]
+            },
+            "assessment_ro": {
+              "type": "string"
+            },
+            "service_interval_ro": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "documentation_status": {
+              "type": "string",
+              "enum": [
+                "DOCUMENTED",
+                "SELLER_CLAIM_ONLY",
+                "NOT_PROVIDED",
+                "UNKNOWN"
+              ]
+            },
+            "priority": {
+              "type": "string",
+              "enum": [
+                "CRITICAL",
+                "HIGH",
+                "MEDIUM",
+                "LOW",
+                "INFO"
+              ]
+            },
+            "source_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "seller_evidence_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "id",
+            "component",
+            "category",
+            "assessment_ro",
+            "service_interval_ro",
+            "documentation_status",
+            "priority",
+            "source_ids",
+            "seller_evidence_ids"
+          ]
+        }
+      },
+      "repair_costs": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "related_issue_id": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "component": {
+              "type": "string"
+            },
+            "cost_type": {
+              "type": "string",
+              "enum": [
+                "ROUTINE_MAINTENANCE",
+                "PREVENTIVE_MAINTENANCE",
+                "POSSIBLE_REPAIR",
+                "CONFIRMED_REPAIR"
+              ]
+            },
+            "min_amount": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "max_amount": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "currency": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "country": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "estimate_date": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "scope_ro": {
+              "type": "string"
+            },
+            "source_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "limitations_ro": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "related_issue_id",
+            "component",
+            "cost_type",
+            "min_amount",
+            "max_amount",
+            "currency",
+            "country",
+            "estimate_date",
+            "scope_ro",
+            "source_ids",
+            "limitations_ro"
+          ]
+        }
+      },
+      "inspection_priorities": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "title_ro": {
+              "type": "string"
+            },
+            "procedure_ro": {
+              "type": "string"
+            },
+            "reason_ro": {
+              "type": "string"
+            },
+            "priority": {
+              "type": "string",
+              "enum": [
+                "CRITICAL",
+                "HIGH",
+                "MEDIUM",
+                "LOW",
+                "INFO"
+              ]
+            },
+            "performed_by": {
+              "type": "string",
+              "enum": [
+                "BUYER",
+                "INDEPENDENT_MECHANIC",
+                "BRAND_SPECIALIST",
+                "HV_CERTIFIED_TECHNICIAN",
+                "DEALER"
+              ]
+            },
+            "related_issue_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "related_recall_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "source_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "id",
+            "title_ro",
+            "procedure_ro",
+            "reason_ro",
+            "priority",
+            "performed_by",
+            "related_issue_ids",
+            "related_recall_ids",
+            "source_ids"
+          ]
+        }
+      },
+      "technical_summary": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "overview_ro": {
+            "type": "string"
+          },
+          "main_concerns_ro": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "positive_evidence_ro": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "critical_unknowns_ro": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "overall_confidence": {
+            "type": "string",
+            "enum": [
+              "HIGH",
+              "MEDIUM",
+              "LOW",
+              "UNKNOWN"
+            ]
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "overview_ro",
+          "main_concerns_ro",
+          "positive_evidence_ro",
+          "critical_unknowns_ro",
+          "overall_confidence",
+          "source_ids"
+        ]
+      }
+    },
+    "required": [
+      "vehicle_configuration",
+      "evidence_coverage",
+      "known_issues",
+      "recalls",
+      "maintenance_assessment",
+      "repair_costs",
+      "inspection_priorities",
+      "technical_summary"
+    ]
+  }
+}

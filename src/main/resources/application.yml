@@ -47,6 +47,8 @@ webservice:
 
 llm:
   provider: ${LLM_PROVIDER:openai}
+  ad-extractor-provider: ${AD_EXTRACTOR_PROVIDER:openai}
+  ad-extractor-model: ${AD_EXTRACTOR_MODEL:gpt-6.2-astra}
   openai:
     api-key: ${OPENAI_API_KEY:}
     model: ${OPENAI_MODEL:gpt-6.2-astra}

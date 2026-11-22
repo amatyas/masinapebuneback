@@ -27,12 +27,20 @@ public class AdCheckRequest {
 	@Column(name = "created_at", nullable = false, updatable = false)
 	private LocalDateTime createdAt;
 
+	@Column(name = "language", nullable = false, length = 2)
+	private String language;
+
+	@Column(name = "country", nullable = false, length = 16)
+	private String country;
+
 	protected AdCheckRequest() {
 	}
 
-	public AdCheckRequest(String id, String url) {
+	public AdCheckRequest(String id, String url, String language, String country) {
 		this.id = id;
 		this.url = url;
+		this.language = language;
+		this.country = country;
 		this.status = AdCheckStatus.PENDING;
 		this.createdAt = LocalDateTime.now();
 	}
@@ -55,5 +63,13 @@ public class AdCheckRequest {
 
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
+	}
+
+	public String getLanguage() {
+		return language;
+	}
+
+	public String getCountry() {
+		return country;
 	}
 }

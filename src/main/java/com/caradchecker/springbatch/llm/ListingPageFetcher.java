@@ -25,7 +25,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 @Component
 public class ListingPageFetcher {
 
-	private static final int MAX_BYTES = 2_000_000;
+	private static final int MAX_BYTES = 6_000_000;
 	private static final int MAX_CONTENT_CHARS = 80_000;
 	private static final int MAX_REDIRECTS = 5;
 	private static final Pattern NEXT_DATA = Pattern.compile("<script id=\"__NEXT_DATA__\"[^>]*>(.*?)</script>", Pattern.DOTALL);

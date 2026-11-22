@@ -6,6 +6,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class LlmProperties {
 
 	private String provider = "gemini";
+	private String adExtractorProvider = "openai";
+	private String adExtractorModel = "gpt-6.2-astra";
 	private Provider openai = new Provider();
 	private Provider gemini = new Provider();
 
@@ -15,6 +17,22 @@ public class LlmProperties {
 
 	public void setProvider(String provider) {
 		this.provider = provider;
+	}
+
+	public String getAdExtractorProvider() {
+		return adExtractorProvider;
+	}
+
+	public void setAdExtractorProvider(String adExtractorProvider) {
+		this.adExtractorProvider = adExtractorProvider;
+	}
+
+	public String getAdExtractorModel() {
+		return adExtractorModel;
+	}
+
+	public void setAdExtractorModel(String adExtractorModel) {
+		this.adExtractorModel = adExtractorModel;
 	}
 
 	public Provider getOpenai() {

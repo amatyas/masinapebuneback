@@ -2,7 +2,10 @@ package com.caradchecker.springbatch.adrequest;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -11,7 +14,9 @@ import org.springframework.web.server.ResponseStatusException;
 public class AdRequestService {
 
 	private static final int MAX_URL_LENGTH = 2048;
+	private static final String VERDICT_STAGE = AnalysisStage.LLM5_AD_VERDICT.name();
 
+	private final Logger log = LoggerFactory.getLogger(getClass());
 	private final AdCheckRequestRepository repository;
 	private final AdExtractionRepository extractionRepository;
 	private final AdExtractionService extractionService;
@@ -23,15 +28,43 @@ public class AdRequestService {
 		this.extractionService = extractionService;
 	}
 
-	public AdCheckRequest create(String requestId, String rawUrl) {
+	public AdCheckRequest create(String requestId, String rawUrl, String rawLanguage, String rawCountry) {
 		String url = normalizeUrl(rawUrl);
-		AdCheckRequest saved = repository.save(new AdCheckRequest(requestId, url));
+		String language = ResponseLanguage.parse(rawLanguage).code();
+		String country = UserCountry.parse(rawCountry).countryName();
+		Optional<AdExtraction> cached = findCachedVerdict(url, language, country);
+		AdCheckRequest request = new AdCheckRequest(requestId, url, language, country);
+		if (cached.isPresent()) {
+			request.setStatus(AdCheckStatus.COMPLETED);
+			AdCheckRequest saved = repository.save(request);
+			AdExtraction previous = cached.get();
+			for (AdExtraction stage : extractionRepository.findByRequestId(previous.getRequestId())) {
+				extractionRepository.save(new AdExtraction(saved.getId(), stage.getProvider(), stage.getStage(),
+						stage.getStatus(), stage.getResultJson(), stage.getErrorMessage(), 0));
+			}
+			log.info("{} cache hit url={} language={} country={} sourceRequest={}", requestId, url, language, country,
+					previous.getRequestId());
+			return saved;
+		}
+		AdCheckRequest saved = repository.save(request);
 		extractionService.extract(saved.getId());
 		return saved;
 	}
 
 	public List<AdExtraction> extractions(String requestId) {
 		return extractionRepository.findByRequestId(requestId);
+	}
+
+	private Optional<AdExtraction> findCachedVerdict(String url, String language, String country) {
+		List<AdCheckRequest> previous = repository.findByUrlAndLanguageAndCountryOrderByCreatedAtDesc(url, language, country);
+		for (AdCheckRequest request : previous) {
+			Optional<AdExtraction> verdict = extractionRepository.findFirstByRequestIdAndStageAndStatusOrderByCreatedAtDesc(
+					request.getId(), VERDICT_STAGE, ExtractionStatus.OK);
+			if (verdict.isPresent() && verdict.get().getResultJson() != null && !verdict.get().getResultJson().isBlank()) {
+				return verdict;
+			}
+		}
+		return Optional.empty();
 	}
 
 	public AdCheckRequest get(String requestId) {

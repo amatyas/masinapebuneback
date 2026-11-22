@@ -1,11 +1,11 @@
 package com.caradchecker.springbatch.rest.api.adrequest;
 
-import java.util.List;
 import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import com.caradchecker.springbatch.adrequest.AdCheckRequest;
 import com.caradchecker.springbatch.adrequest.AdRequestService;
@@ -24,10 +25,12 @@ public class AdRequestController {
 
 	private final Logger log = LoggerFactory.getLogger(getClass());
 	private final AdRequestService adRequestService;
+	private final AdRequestEvents adRequestEvents;
 	private final ObjectMapper objectMapper;
 
-	public AdRequestController(AdRequestService adRequestService, ObjectMapper objectMapper) {
+	public AdRequestController(AdRequestService adRequestService, AdRequestEvents adRequestEvents, ObjectMapper objectMapper) {
 		this.adRequestService = adRequestService;
+		this.adRequestEvents = adRequestEvents;
 		this.objectMapper = objectMapper;
 	}
 
@@ -35,25 +38,32 @@ public class AdRequestController {
 	public ResponseEntity<AdRequestResponse> create(@RequestBody CreateAdRequest body) {
 		String requestId = UUID.randomUUID().toString();
 		long start = System.nanoTime();
-		log.info("{} incoming request url={}", requestId, body == null ? null : body.url());
+		log.info("{} incoming request url={} language={} country={}", requestId, body == null ? null : body.url(), body == null ? null : body.language(), body == null ? null : body.country());
 		try {
-			AdCheckRequest created = adRequestService.create(requestId, body == null ? null : body.url());
-			return ResponseEntity.status(HttpStatus.CREATED).body(AdRequestResponse.from(created, List.of(), objectMapper));
+			AdCheckRequest created = adRequestService.create(requestId, body == null ? null : body.url(), body == null ? null : body.language(), body == null ? null : body.country());
+			return ResponseEntity.status(HttpStatus.CREATED).body(AdRequestResponse.from(created, adRequestService.extractions(created.getId()), objectMapper));
 		} finally {
 			log.info("{} total execution time {} ms", requestId, elapsedMillis(start));
 		}
 	}
 
+	@GetMapping(path = "/{requestId}/events", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+	public ResponseEntity<SseEmitter> events(@PathVariable String requestId) {
+		AdCheckRequest request = adRequestService.get(requestId);
+		SseEmitter emitter = adRequestEvents.subscribe(request.getId(), () -> {
+			AdCheckRequest current = adRequestService.get(request.getId());
+			return AdRequestResponse.from(current, adRequestService.extractions(current.getId()), objectMapper);
+		});
+		return ResponseEntity.ok()
+				.header("Cache-Control", "no-cache")
+				.header("X-Accel-Buffering", "no")
+				.body(emitter);
+	}
+
 	@GetMapping("/{requestId}")
 	public AdRequestResponse get(@PathVariable String requestId) {
-		long start = System.nanoTime();
-		log.info("{} incoming request", requestId);
-		try {
-			AdCheckRequest request = adRequestService.get(requestId);
-			return AdRequestResponse.from(request, adRequestService.extractions(request.getId()), objectMapper);
-		} finally {
-			log.info("{} total execution time {} ms", requestId, elapsedMillis(start));
-		}
+		AdCheckRequest request = adRequestService.get(requestId);
+		return AdRequestResponse.from(request, adRequestService.extractions(request.getId()), objectMapper);
 	}
 
 	private long elapsedMillis(long startNanos) {
